@@ -14,6 +14,7 @@ public class Achievement
 	
 	public Achievement(String description, double reward, ImageIcon picture, Timestamp achievementDate)
 	{
+		//Hola 
 		this.description = description;
 		this.reward = reward;
 		this.picture = picture;
