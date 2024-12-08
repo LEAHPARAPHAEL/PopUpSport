@@ -311,7 +311,6 @@ public class OrderPanel extends DescendantPanel implements Refreshable
 		{
 			scrollableOrderPanel.displayOrders();
 		}
-		//Adios
 
 	}
 	

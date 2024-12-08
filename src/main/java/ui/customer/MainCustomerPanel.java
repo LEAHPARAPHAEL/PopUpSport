@@ -40,6 +40,7 @@ public class MainCustomerPanel extends DescendantPanel
 	private JLabel reservationLabel;
 	private JButton reservationButton;
 	private JMenu credit;
+	private JMenu premium;
 	
 	public MainCustomerPanel(GUI gui)
 	{
@@ -89,7 +90,7 @@ public class MainCustomerPanel extends DescendantPanel
         JMenuItem creditInfo = new JMenuItem("<html>You can add credit to<br>your account by<br>uploading new<br>achievements !</html>");
         credit.add(creditInfo);
         creditInfo.setBackground(GUI.BACKGROUND_CUSTOMER);
-        JMenu premium = new JMenu(gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().isVip() ? "Premium" : "       ");
+        this.premium = new JMenu(gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().isVip() ? "Premium" : "       ");
         premium.setForeground(GUI.ORANGE);
         premium.setFont(new Font("Serif", Font.BOLD, 20));
         JMenuItem premiumInfo = new JMenuItem("<html>A premium account<br>allows you to get more<br>rewards from your<br>achievements !</html>");
@@ -415,6 +416,7 @@ public class MainCustomerPanel extends DescendantPanel
 	public void updateCredit()
 	{
 		credit.setText(String.format("<html>Credit : %.2f <span style='font-weight:bold; font-size:10px;'>\u2359</span> </html>", gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getCredit()));
+		premium.setText(gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().isVip() ? "Premium" : "       ");
 	}
 	
 	
