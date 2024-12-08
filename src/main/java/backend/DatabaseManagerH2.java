@@ -2196,7 +2196,7 @@ public class DatabaseManagerH2
 	            if (reward == 0)
 	            	return 0;
 		    	if (customerManager.getCurrentCustomer().isVip())
-		    		reward *= 1.5;
+		    		reward *= 2;
 	            
 	    		Connection conn = getH2Connection();
 	    		PreparedStatement statement = conn.prepareStatement(insertQuery);

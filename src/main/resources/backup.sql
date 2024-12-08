@@ -42,7 +42,7 @@ CREATE TABLE CustomerOrders (
     deliveryTime TIMESTAMP NOT NULL,
     orderStatus VARCHAR(50),
     CONSTRAINT UNIQUE_CLIENTS_TIME UNIQUE (clientUsername, orderTime),
-    CONSTRAINT FK_CLIENTS FOREIGN KEY (clientUsername) REFERENCES Clients(username)
+    CONSTRAINT FK_CLIENTS FOREIGN KEY (clientUsername) REFERENCES Clients(username) ON DELETE CASCADE
 );
 
 CREATE TABLE Reservation (
@@ -51,7 +51,7 @@ CREATE TABLE Reservation (
     clientUsername VARCHAR(50),
     reservationTime TIMESTAMP,
     PRIMARY KEY (clientUsername, productID),
-    CONSTRAINT FK_USERNAME1 FOREIGN KEY (clientUsername) REFERENCES Clients(username),
+    CONSTRAINT FK_USERNAME1 FOREIGN KEY (clientUsername) REFERENCES Clients(username) ON DELETE CASCADE,
     CONSTRAINT FK_PRODUCT1 FOREIGN KEY (productID) REFERENCES Products(id)
 );
 
@@ -60,7 +60,7 @@ CREATE TABLE Basket (
     quantity INT,
     clientUsername VARCHAR(50),
     PRIMARY KEY (clientUsername, productID),
-    CONSTRAINT FK_USERNAME FOREIGN KEY (clientUsername) REFERENCES Clients(username),
+    CONSTRAINT FK_USERNAME FOREIGN KEY (clientUsername) REFERENCES Clients(username) ON DELETE CASCADE,
     CONSTRAINT FK_PRODUCT FOREIGN KEY (productID) REFERENCES Products(id)
 );
 
@@ -81,7 +81,7 @@ CREATE TABLE Achievements (
 	reward DOUBLE,
 	picture BLOB,
 	achievementDate TIMESTAMP,
-	CONSTRAINT FK_USERNAME_ACHIEVEMENTS FOREIGN KEY (clientUsername) REFERENCES Clients(username)
+	CONSTRAINT FK_USERNAME_ACHIEVEMENTS FOREIGN KEY (clientUsername) REFERENCES Clients(username) ON DELETE CASCADE
 );
 
 
