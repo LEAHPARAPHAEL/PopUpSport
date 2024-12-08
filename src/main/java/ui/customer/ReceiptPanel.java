@@ -12,7 +12,9 @@ import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map.Entry;
@@ -171,12 +173,46 @@ public class ReceiptPanel extends DescendantPanel
         Paragraph title = new Paragraph("Order Receipt").setTextAlignment(TextAlignment.CENTER).setFontSize(20).setMarginBottom(20);
         
         
-        //Importing a new font to allow for special characters to be displayed 
-        final String FONT = "./src/main/resources/fonts/EversonMono.ttf";
-        PdfFont font = PdfFontFactory.createFont(FONT, PdfEncodings.IDENTITY_H);
+        final String FONT_PATH = "fonts/EversonMono.ttf";
+
+	    InputStream fontStream = getClass().getClassLoader().getResourceAsStream(FONT_PATH);
+	
+	    byte[] fontBytes;
+	    try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) 
+	    {
+	        byte[] data = new byte[1024];
+	        int bytesRead;
+	        while ((bytesRead = fontStream.read(data, 0, data.length)) != -1) 
+	        {
+	            buffer.write(data, 0, bytesRead);
+	        }
+	        buffer.flush();
+	        fontBytes = buffer.toByteArray();
+	    }
+	
+	    PdfFont font = PdfFontFactory.createFont(fontBytes, PdfEncodings.IDENTITY_H, true);
         
-        //Adding our logo
-        PdfImageXObject xObject = new PdfImageXObject(ImageDataFactory.create("./src/main/resources/Logo.png"));
+	    //Add our logo
+	    final String LOGO_PATH = "Logo.png";
+
+	    InputStream logoStream = getClass().getClassLoader().getResourceAsStream(LOGO_PATH);
+
+	  // Convert InputStream to byte[]
+	    byte[] logoBytes;
+	    try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) 
+	    {
+	        byte[] data = new byte[1024];
+	        int bytesRead;
+	        while ((bytesRead = logoStream.read(data, 0, data.length)) != -1) 
+	        {
+	            buffer.write(data, 0, bytesRead);
+	        }
+	        buffer.flush();
+	        logoBytes = buffer.toByteArray();
+	    }
+
+	  // Create the PdfImageXObject from the byte array
+	  PdfImageXObject xObject = new PdfImageXObject(ImageDataFactory.create(logoBytes));
         com.itextpdf.layout.element.Image logoTopRight = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.RIGHT);
         com.itextpdf.layout.element.Image logoBottomLeft = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.LEFT);
         logoBottomLeft.setFixedPosition(20, 20);
