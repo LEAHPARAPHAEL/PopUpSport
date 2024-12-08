@@ -197,7 +197,6 @@ public class ReceiptPanel extends DescendantPanel
 
 	    InputStream logoStream = getClass().getClassLoader().getResourceAsStream(LOGO_PATH);
 
-	  // Convert InputStream to byte[]
 	    byte[] logoBytes;
 	    try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) 
 	    {
@@ -211,8 +210,8 @@ public class ReceiptPanel extends DescendantPanel
 	        logoBytes = buffer.toByteArray();
 	    }
 
-	  // Create the PdfImageXObject from the byte array
-	  PdfImageXObject xObject = new PdfImageXObject(ImageDataFactory.create(logoBytes));
+	    // Create the PdfImageXObject from the byte array
+	    PdfImageXObject xObject = new PdfImageXObject(ImageDataFactory.create(logoBytes));
         com.itextpdf.layout.element.Image logoTopRight = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.RIGHT);
         com.itextpdf.layout.element.Image logoBottomLeft = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.LEFT);
         logoBottomLeft.setFixedPosition(20, 20);

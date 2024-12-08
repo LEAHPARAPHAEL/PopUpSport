@@ -3,6 +3,7 @@ package ui.customer;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,6 +19,7 @@ import ui.tools.*;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import ui.GUI;
@@ -57,16 +59,17 @@ public class BasketPanel extends DescendantPanel implements Refreshable
 	    
 	    basketScrollablePanel.displayBasketItems();
 	    
-	    
 	    //Right side of the panel : total price of the basket and button to pay.
+	    NonOpaqueJLabel myBasket = new NonOpaqueJLabel("My basket", SwingConstants.CENTER);
+	    myBasket.setFont(new Font("Serif", Font.BOLD, 25));
 	    gbc = new GridBagConstraints();
 	    gbc.gridx = 1;
 	    gbc.gridy = 0;
 	    gbc.weightx = 0.4;
-	    gbc.weighty = 0.1;
+	    gbc.weighty = 0.2;
 	    gbc.gridwidth = 3;
 	    gbc.fill = GridBagConstraints.BOTH;
-	    add(new NonOpaqueJLabel(), gbc);
+	    add(myBasket, gbc);
 	    
 	    gbc = new GridBagConstraints();
 	    this.totalPrice = new NonOpaqueJLabel(String.format("<html>Total price : %.2f <span style='color:red; font-weight:bold; font-size:10px;'>\u2359</span>.</html>",gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getBasketManager().getTotalPrice()), SwingUtilities.CENTER);
@@ -85,7 +88,7 @@ public class BasketPanel extends DescendantPanel implements Refreshable
 	    gbc.gridx = 1;
 	    gbc.gridy = 1;
 	    gbc.weightx = 0.4;
-	    gbc.weighty = 0.2;
+	    gbc.weighty = 0.1;
 	    gbc.gridwidth = 3;
 	    gbc.fill = GridBagConstraints.BOTH;
 	    add(credit, gbc);
@@ -134,10 +137,11 @@ public class BasketPanel extends DescendantPanel implements Refreshable
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MainCustomerPanel mainCustomerPanel = (MainCustomerPanel)SwingUtilities.getAncestorOfClass(MainCustomerPanel.class, next);
 				//Not enough credit to buy the content of this basket
-				if (gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getCredit() < gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getBasketManager().getTotalPrice())
+			    if (gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getCredit() < gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getBasketManager().getTotalPrice())
 				{
-					errorArea.setText("Insufficient credit. You can add credit to your account in the menu My profile accessible via My account > Profile.");
+					mainCustomerPanel.showInfoPanelForTheNext(10, "Insufficient credit. You can get more cones by publishing achievements in My account > Achievements");
 					return;
 				}
 				
@@ -150,7 +154,7 @@ public class BasketPanel extends DescendantPanel implements Refreshable
 					//No problem with the quantities, so we proceed with the reservation.
 					if (successFlags[0] == 0 && successFlags[1] == 0)
 					{
-						MainCustomerPanel mainCustomerPanel = (MainCustomerPanel)SwingUtilities.getAncestorOfClass(MainCustomerPanel.class, next);
+						
 						mainCustomerPanel.beginReservation();
 					}
 						
