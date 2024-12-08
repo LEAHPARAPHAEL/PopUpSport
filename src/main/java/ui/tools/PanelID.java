@@ -1,0 +1,37 @@
+package ui.tools;
+
+/**
+ * An enumeration containing identifiers for different classes of panels.
+ */
+public enum PanelID {
+	FILTER,
+	MENU,
+	PRODUCT_INFO,
+	PRODUCT,
+	SEARCH,
+	SHOPPING,
+	CARD_LAYOUT_SHOPPING,
+	ADMIN_LOGIN,
+	CLIENT_LOGIN,
+	CONNEXION,
+	LOGIN,
+	CATALOG,
+	MAIN,
+	SIGN_UP,
+	BASKET,
+	PAYMENT,
+	CREDIT,
+	ORDER,
+	RECEIPT,
+	NEW,
+	ADMIN,
+	ADMIN_CATALOG,
+	CUSTOMER_MANAGEMENT,
+	PRODUCT_MANAGEMENT,
+	CUSTOMERS,
+	CUSTOMER_INFO,
+	DISCOUNT,
+	GOAL,
+	ACHIEVEMENTS,
+	NEW_ACHIEVEMENT
+}
