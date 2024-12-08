@@ -25,12 +25,19 @@ import javax.swing.SwingUtilities;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.xobject.PdfImageXObject;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
 
@@ -163,12 +170,25 @@ public class ReceiptPanel extends DescendantPanel
         Document document = new Document(pdfDocument);
         Paragraph title = new Paragraph("Order Receipt").setTextAlignment(TextAlignment.CENTER).setFontSize(20).setMarginBottom(20);
         
+        
+        //Importing a new font to allow for special characters to be displayed 
+        final String FONT = "./src/main/resources/fonts/EversonMono.ttf";
+        PdfFont font = PdfFontFactory.createFont(FONT, PdfEncodings.IDENTITY_H);
+        
+        //Adding our logo
+        PdfImageXObject xObject = new PdfImageXObject(ImageDataFactory.create("./src/main/resources/Logo.png"));
+        com.itextpdf.layout.element.Image logoTopRight = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.RIGHT);
+        com.itextpdf.layout.element.Image logoBottomLeft = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.LEFT);
+        logoBottomLeft.setFixedPosition(20, 20);
+        document.add(logoTopRight);
+        document.add(logoBottomLeft);
+        
         //Adds all the information contained in the order, separated in several paragraphs.
         LocalDateTime formattedOrderTime = order.getOrderTime().toLocalDateTime();
         String formattedDate = formattedOrderTime.format(formatter);
-        Paragraph orderReference = new Paragraph(String.format("Order #%d", order.getOrderID()));
-        Paragraph orderAddress = new Paragraph("Delivery address : "+order.getAddress());
-        Paragraph orderTime = new Paragraph("Date : "+formattedDate).setMarginBottom(20);
+        Paragraph orderReference = new Paragraph(String.format("Order #%d", order.getOrderID())).setBold();
+        Paragraph orderAddress = new Paragraph("Delivery address : "+ order.getAddress());
+        Paragraph orderTime = new Paragraph("Date : "+ formattedDate).setMarginBottom(20);
         Paragraph name = new Paragraph("Customer : " + gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getName() + " " + gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getFirstName()).setMarginBottom(40);
         Paragraph details = new Paragraph("Order details").setTextAlignment(TextAlignment.CENTER).setFontSize(16);
         document.add(title);
@@ -183,7 +203,7 @@ public class ReceiptPanel extends DescendantPanel
         table.setWidth(UnitValue.createPercentValue(100)); 
 
         table.addHeaderCell(new Cell().add(new Paragraph("Product").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
-        table.addHeaderCell(new Cell().add(new Paragraph("Quantity x unit price").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
+        table.addHeaderCell(new Cell().add(new Paragraph("Quantity x Unit Price").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
         table.addHeaderCell(new Cell().add(new Paragraph("Price").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
 
         for (Entry<Integer, Integer> entry : order.getOrderContent().entrySet()) {
@@ -195,8 +215,14 @@ public class ReceiptPanel extends DescendantPanel
 
         }
         double total = order.getPrice();
+        Paragraph p = new Paragraph();
+        Text totalValue = new Text(String.format("%.2f ", total)).setBold();
+        Text conesCurr = new Text("\u2359").setBold().setFont(font).setFontColor(com.itextpdf.kernel.color.Color.RED);
+        p.add(totalValue);
+        p.add(conesCurr);
+        
         table.addCell(new Cell(1, 2).add(new Paragraph("Total price").setBold()));
-        table.addCell(new Cell().add(new Paragraph(String.format("%.2f \u2359", total)).setBold()));
+        table.addCell(new Cell().add(p));
 
         document.add(table);
         document.close();
