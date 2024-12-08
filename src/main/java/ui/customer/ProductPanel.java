@@ -104,7 +104,7 @@ public class ProductPanel extends RoundedPanel implements Refreshable
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		gbc.weightx = 1;
-		gbc.weighty = 0.05;
+		gbc.weighty = 0.1;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.anchor = GridBagConstraints.SOUTH;
 		gbc.insets = new Insets(5,5,5,5);
@@ -114,7 +114,7 @@ public class ProductPanel extends RoundedPanel implements Refreshable
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.weightx = 1;
-		gbc.weighty = 0.1;
+		gbc.weighty = 0.05;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.anchor = GridBagConstraints.SOUTH;
 		add(new JLabel(), gbc);

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -300,6 +301,10 @@ public class OrderPanelAdmin extends DescendantPanel implements Refreshable
 		if (updatedOrders > 0)
 		{
 			scrollableOrderPanel.displayOrders();
+			for (ComponentListener componentListener : scrollPane.getViewport().getComponentListeners())
+			{
+				componentListener.componentResized(new ComponentEvent(this, ComponentEvent.COMPONENT_RESIZED));
+			}
 		}
 	}
 	
