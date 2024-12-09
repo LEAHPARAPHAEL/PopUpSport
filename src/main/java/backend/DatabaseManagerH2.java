@@ -988,11 +988,11 @@ public class DatabaseManagerH2
 	    	addToProductTable("Sports Vinyl Dumbbells", "Vinyl dumbbells, ranging from .5 to 6 kilogrammes. Fitness weights", "FXR Sports", 2999, 150, "dumbbells.png", "blue, red, black, white, green, yellow", 0);
 	    	addToProductTable("Endurance Treadmill", "Maximise your resources with a treadmill that’s simple for new users and powerful for enthusiasts.", "Matrix Fitness", 20000, 10, "treadmill.png", "black, white, yellow", 0);
 	    	
-	    	addToProductTable("Tennis racket", "Perfect for players who want to spend time with friends and family, in an exhilarating game of tennis.", "Wilson", 4500, 29, "tennis_racket.png", "black, green, red, white", 0);
+	    	addToProductTable("Tennis racket", "Perfect for players who want to spend time with friends and family.", "Wilson", 4500, 29, "tennis_racket.png", "black, green, red, white", 0);
 	    	addToProductTable("4-Tennis balls can", "Official US Open ball. Approved for competition by the USTA and ITF.", "Wilson", 999, 31, "tennis_balls.png", "black, yellow", 0);
 	    	addToProductTable("First EVO rowing shell", "The FIRST EVO is a French-made boat, ideal for beginners or young passengers.", "L'Atelier Composite", 99999.99, 3, "aviron.png", "black, green", 0);
-	    	addToProductTable("Girls Figure Ice Skates", "These Ice Skates provide strength, durability and comfort without irritation for recreational skaters !", "Jackson Classics", 11500, 115, "ice_skate.png", "white", 0);
-	    	addToProductTable("Badminton Shuttlecocks", "This pack of badminton shuttlecocks offers a reliable, durable option for indoor and outdoor play. Made from cork.", "KES", 879, 93, "bad_shut.png", "black, white", 0);
+	    	addToProductTable("Girls Figure Ice Skates", "These Ice Skates provide strength and comfort for recreational skaters !", "Jackson Classics", 11500, 115, "ice_skate.png", "white", 0);
+	    	addToProductTable("Badminton Shuttlecocks", "These shuttlecocks offer a reliable option for outdoor play. Made from cork.", "KES", 879, 93, "bad_shut.png", "black, white", 0);
 	    }
 	    
 	    /**

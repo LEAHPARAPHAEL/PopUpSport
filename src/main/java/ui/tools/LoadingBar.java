@@ -85,9 +85,9 @@ public class LoadingBar extends JLayeredPane
 	}
 	
 	public URL getRandomCursorStream() {
-		 String[] cursors = new String[] {"cursors/football.png", "cursors/rugby.png", "cursors/basketball.png"};
+		 String[] cursors = new String[] {"cursors/football.png", "cursors/rugby.png", "cursors/basketball.png", "cursors/tennis.png"};
 		 Random random = new Random();
-		 int rand = random.nextInt(3);
+		 int rand = random.nextInt(cursors.length);
 		 
 		 return getClass().getClassLoader().getResource(cursors[rand]);
 	}
