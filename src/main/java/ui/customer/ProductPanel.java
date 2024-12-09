@@ -73,7 +73,8 @@ public class ProductPanel extends RoundedPanel implements Refreshable
 		gbc = new GridBagConstraints();
 		NonOpaqueTextArea productName = new NonOpaqueTextArea(product.getName());
 		productName.setEditable(false);
-		productName.setForeground(Color.DARK_GRAY);
+		productName.setForeground(new Color(0, 0, 204));
+		productName.setFont(productName.getFont().deriveFont(Font.BOLD));
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.weightx = 1;
@@ -87,6 +88,7 @@ public class ProductPanel extends RoundedPanel implements Refreshable
 		gbc = new GridBagConstraints();
 		NonOpaqueJLabel productBrand = new NonOpaqueJLabel(product.getBrand());
 		productBrand.setForeground(Color.DARK_GRAY);
+		productBrand.setFont(productBrand.getFont().deriveFont(Font.ITALIC));
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.weightx = 1;
