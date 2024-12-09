@@ -72,7 +72,7 @@ public class ProductPanelAdmin extends RoundedPanel
 		gbc = new GridBagConstraints();
 		NonOpaqueTextArea productName = new NonOpaqueTextArea(product.getName());
 		productName.setEditable(false);
-		productName.setForeground(new Color(0, 0, 204));
+		productName.setForeground(new Color(157, 21, 76));
 		productName.setFont(productName.getFont().deriveFont(Font.BOLD));
 		gbc.gridx = 0;
 		gbc.gridy = 1;
