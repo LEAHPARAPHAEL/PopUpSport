@@ -974,23 +974,12 @@ public class DatabaseManagerH2
 	     */
 	    public void addProductsToDatabase()
 	    {
-	    	/*
-	    	addToProductTable("Ballon de football PSG", "Balle de football officielle du Paris-Saint-Germain saison 2023. Taille 5.", "PSG", 29.99, 25, "src/main/resources/balle_psg.png", "blue, red", 0);
-	    	addToProductTable("Maillot OM", "Maillot officiel de l'Olympique de Marseille.", "Puma", 45, 20, "src/main/resources/maillot.png", "white, blue", 0);
-	    	addToProductTable("Chasuble", "Chasuble rouge taille adulte", "Décathlon", 3.99, 100, "src/main/resources/chasuble.png", "red", 0);
-	    	addToProductTable("Gants Hyperact Starter", "Gants de gardien de football bleu noir.", "Uhlsport", 54.99, 30, "src/main/resources/gants_foot.png", "blue, black", 0);
-	    	addToProductTable("Balle de rugby Gilbert Omega", "Balle de rugby Gilbert Match modèle Omega", "Gilbert", 38, 60, "src/main/resources/balle_rugby.png", "white, blue, black", 0);
-	    	addToProductTable("Lunettes de natation 100XBase", "Lunettes de natation rose bleu 100XBase taille S Nabaji", "Nabaji", 14, 80, "src/main/resources/lunettes.png", "pink, blue", 0);
-	    	addToProductTable("Ballon de football OM", "Balle de football officielle de l'Olympique de Marseille. Taille 5", "Olympique de Marseille", 17, 34, "src/main/resources/balle_om.png", "black, blue", 0);
-	    	addToProductTable("Plots d'entraînement", "Plots pour entraînement de football. Couleurs : bleu, rouge, jaune, blanc.", "Kappa", 8.50, 60, "src/main/resources/plots.png", "white, blue, yellow, red", 0);
-	    	addToProductTable("Short de sport noir.", "Short Adidas Essentials homme 3 rayures Chelsea sport gymnastique climalite original.", "Adidas", 15.90, 55, "src/main/resources/short.png", "black", 0);
-	    	*/
 	    	addToProductTable("PSG football", "Official and certified Paris-Saint-Germain football (2023 season)", "PSG", 2999, 25, "balle_psg.png", "blue, red", 0);
 	    	addToProductTable("OM Jersey", "Olympique de Marseille official home jersey", "Puma", 4900, 20, "maillot.png", "white, blue", 0);
 	    	addToProductTable("Bib", "Multi-purpose red bib, adult size", "Décathlon", 399, 100, "chasuble.png", "red", 0);
 	    	addToProductTable("Hyperact Starter Gloves", "Football goalkeeping gloves", "Uhlsport", 5499, 30, "gants_foot.png", "blue, black", 0);
 	    	addToProductTable("Gilbert Omega rugby ball", "Gilbert rugby ball, Omega model", "Gilbert", 3800, 60, "balle_rugby.png", "white, blue, black", 0);
-	    	addToProductTable("100XBase Swimming Goggles", "Blue-pinkish swimming goggles, 100XBase. For children.", "Nabaji", 1449, 80, "lunettes.png", "pink, blue", 0);
+	    	addToProductTable("100XBase Swimming Goggles", "Blue-pinkish swimming goggles, 100XBase. For children.", "Nabaji", 1449, 80, "lunettes.png", "magenta, cyan", 0);
 	    	addToProductTable("Olympique de Marseille football", "Official and certified OM football (2022 season)", "Olympique de Marseille", 1779, 34, "balle_om.png", "black, blue", 0);
 	    	addToProductTable("Training cones", "Football training cones. Several colours are available : blue, red, yellow and white.", "Kappa", 850, 60, "plots.png", "white, blue, yellow, red", 0);
 	    	addToProductTable("Black shorts", "Adidas sportswear : Black Shorts. Essentials for Men. Chelsea 3-striped model.", "Adidas", 1590, 55, "short.png", "black", 0);
