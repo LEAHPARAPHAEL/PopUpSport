@@ -50,6 +50,7 @@ public class ProductManagementPanel extends DescendantPanel
 		setOpaque(false);
 		//A filter that contains the criteria the product needs to match, initialized so that all products are selected.
 		productFilter = new ProductFilter();
+		gui.getDatabaseManager().getProductsWithOrKeywords(productFilter);
 		
 		//A panel that enables the admin to select the products according to several filters.
 		this.filterPanel = new AdminFilterPanel();
