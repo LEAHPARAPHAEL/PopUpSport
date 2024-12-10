@@ -31,8 +31,8 @@ import ui.tools.*;
 public class PaymentAndShipmentPanel extends DescendantPanel
 {
 	private NonOpaqueJLabel recapOrder;
-	private static final double LATITUDE = 48.8624388;
-	private static final double LONGITUDE = 2.3656182;
+	private static final double LATITUDE = 48.8521345;
+	private static final double LONGITUDE = 2.3090709;
 	private static final double EARTH_RADIUS = 6371.0; 
 	private RoundedButton cancel;
 	private RoundedButton pay;
