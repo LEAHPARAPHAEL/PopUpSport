@@ -5,6 +5,9 @@ import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
+/**
+ * A JPanel that is modified to have a transparent background.
+ */
 public class NonOpaquePanel extends JPanel
 {
 	public NonOpaquePanel()

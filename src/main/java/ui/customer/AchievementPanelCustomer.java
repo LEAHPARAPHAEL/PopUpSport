@@ -29,6 +29,9 @@ import backend.Order;
 import ui.GUI;
 import ui.tools.*;
 
+/**
+ * The panel where the customer can look at their previous achievements.
+ */
 public class AchievementPanelCustomer extends DescendantPanel
 {
 	private List<Achievement> achievements;
@@ -251,6 +254,7 @@ public class AchievementPanelCustomer extends DescendantPanel
 	                    achievementIcon.setVerticalAlignment(SwingConstants.CENTER);
 	                }
 		            revalidate(); 
+		            repaint();
 	            }
 	        });
 		}

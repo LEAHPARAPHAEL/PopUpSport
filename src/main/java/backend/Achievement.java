@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 
 import javax.swing.ImageIcon;
 
+/**
+ * An object containing all the informations about a customer's achievement.
+ */
 public class Achievement 
 {
 	private String description;

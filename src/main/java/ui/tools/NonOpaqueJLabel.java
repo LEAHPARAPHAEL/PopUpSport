@@ -4,6 +4,9 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 
+/**
+ * A JLabel that was modified to have a transparent background.
+ */
 public class NonOpaqueJLabel extends JLabel
 {
 	public NonOpaqueJLabel()

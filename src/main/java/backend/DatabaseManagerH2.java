@@ -73,7 +73,10 @@ public class DatabaseManagerH2
 	    	return customerManager;
 	    }
 	   
-	    
+	    /**
+	     * Checks if the database already exists before trying to create it.
+	     * @return
+	     */
 	    public boolean isDatabaseInitialized() {
 	        String url = "jdbc:h2:~/projectdbTest";
 	    	//String url = "jdbc:h2:./projectdbTest";
@@ -98,7 +101,11 @@ public class DatabaseManagerH2
 	        return false;
 	    }
 	    
-	    public void initializeDatabase() {
+	    /**
+	     * Initializes the database on the local machine if it doesn't exist.
+	     */
+	    public void initializeDatabase() 
+	    {
 	        String url = "jdbc:h2:~/projectdbTest"; 
 	    	//String url = "jdbc:h2:./projectdbTest";
 	        String user = "sa";
@@ -154,7 +161,10 @@ public class DatabaseManagerH2
 	    }
 	    
 	    
-
+	    /**
+	     * Establishes a connection with the H2 database.
+	     * @return A connection with the H2 database.
+	     */
 	    public Connection getH2Connection()
 	    {
 	        try 
@@ -173,6 +183,9 @@ public class DatabaseManagerH2
 	        }
 	    }
 	    
+	    /**
+	     * Removes the database from the local machine.
+	     */
 	    public void dropAllSchemas() {
             String url = "jdbc:h2:~/projectdbTest";
 	    	//String url = "jdbc:h2:./projectdbTest";
@@ -199,36 +212,7 @@ public class DatabaseManagerH2
 	            e.printStackTrace();
 	        }
 	    }
-	    
-	    public static boolean doesTableExist(String tableName) {
-	        String url = "jdbc:h2:~/projectdbTest";
-	        String user = "sa";
-	        String password = "";
-	    	
-	    	boolean exists = false;
 
-	        String query = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'ADMINDATABASE' AND TABLE_NAME = ?";
-
-	        try (Connection connection = DriverManager.getConnection(url, user, password);
-	             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-	            // Set the table name (convert to uppercase because H2 stores table names in uppercase by default)
-	            preparedStatement.setString(1, tableName.toUpperCase());
-
-	            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-	                if (resultSet.next()) {
-	                    exists = resultSet.getInt(1) > 0;
-	                }
-	            }
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-
-	        return exists;
-	    }
-
-	    
 	    /**
 	     * Enum used for various returns in functions, mostly when checking constraints in the database.
 	     */
@@ -2176,10 +2160,10 @@ public class DatabaseManagerH2
 	    }
 	    
 	    /**
-	     * Inserts an achievement made by the 
-	     * @param description
-	     * @param reward
-	     * @param imageFile
+	     * Inserts an achievement made by the customer
+	     * @param description The description of the customer's achievement.
+	     * @param imageFile The file that was dropped by the customer to represent their achievement.
+	     * @param icon The icon representing the customer's achievement.
 	     * @return
 	     */
 	    public double insertAchievement(String description, File imageFile, ImageIcon icon)

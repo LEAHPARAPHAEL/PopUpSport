@@ -35,6 +35,9 @@ import ui.GUI;
 import ui.admin.AlternatingProductPanel;
 import ui.tools.*;
 
+/**
+ * The panel from which the customer can upload a new achievement.
+ */
 public class NewAchievementPanel extends DescendantPanel
 {
 	
@@ -167,10 +170,13 @@ public class NewAchievementPanel extends DescendantPanel
 			}
 			else
 			{
-				String message = String.format("<html>Congratulations ! Your account has been credited with %.2f <span style='color:red; font-weight:bold; font-size:10px;'>\u2359</span>.</html>", reward);
+				String message = String.format("<html>Congratulations ! Your account has been credited with %.2f <span style='color:red; font-weight:bold; font-size:10px;'>\u2359</span>.", reward);
 				boolean premium = gui.getDatabaseManager().checkIfCustomerBecomesPremium();
 				if (premium)
+				{
 					message += " You are now a premium member !";
+				}
+				message += "</html>";
 				parent.updateCredit();
 				parent.showInfoPanelAndSwitch(10, message, PanelID.SHOPPING);
 			}

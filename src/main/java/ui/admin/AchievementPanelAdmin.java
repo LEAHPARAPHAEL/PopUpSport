@@ -28,6 +28,9 @@ import backend.CustomerProfile;
 import ui.GUI;
 import ui.tools.*;
 
+/**
+ * The panel where the admin can look at the previous achievements of any customer.
+ */
 public class AchievementPanelAdmin extends DescendantPanel
 {
 	private List<Achievement> achievements;
@@ -139,7 +142,7 @@ public class AchievementPanelAdmin extends DescendantPanel
 		    
 			GridBagConstraints gbc;
 		    
-		    //For every order made by the customer, add it from the bottom to have the most recent ones on top.
+		    //For every achievement of the customer, add it from the bottom to have the most recent ones on top.
 		    for (Achievement achievement : achievements)
 		    {
 		    	if (count == 0)

@@ -35,6 +35,9 @@ import javax.swing.Timer;
 
 import ui.GUI;
 
+/**
+ * A loading bar which takes as argument a method that is executed when it finishes loading.
+ */
 public class LoadingBar extends JLayeredPane
 {
 	private JProgressBar load;
@@ -112,6 +115,9 @@ public class LoadingBar extends JLayeredPane
 		return load.isVisible();
 	}
 	
+	/**
+	 * Sets the component visible and start loading.
+	 */
 	public void load()
 	{
 		setVisible(true);
@@ -143,6 +149,9 @@ public class LoadingBar extends JLayeredPane
 		rotatingCursor.setBounds(0, 0, getHeight(), getHeight());
 	}
 	
+	/**
+	 * Stops the timer and hence prevents the execution of the method at the end.
+	 */
 	public void stop()
 	{
 		timer.stop();

@@ -3,6 +3,9 @@ package ui.tools;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A special type of JButton that has rounded corners.
+ */
 public class RoundedButton extends JButton {
     private int cornerRadius = 30;
 

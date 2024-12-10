@@ -6,6 +6,9 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JLayeredPane;
 
+/**
+ * A layered panel in which the most recent messages appear on top and the older ones below. 
+ */
 public class InfoPanel extends JLayeredPane
 {
 	

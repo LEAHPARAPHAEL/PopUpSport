@@ -5,6 +5,9 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JTextArea;
 
+/**
+ * A JTextArea that is modified to have a transparent background.
+ */
 public class NonOpaqueTextArea extends JTextArea
 {
 	public NonOpaqueTextArea()

@@ -5,6 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JSlider;
 
+/**
+ * A customer JSlider in which the value of the slider is reflected by a color gradient along the slider.
+ */
 public class SliderGradient extends JSlider 
 {
     private Color color1;

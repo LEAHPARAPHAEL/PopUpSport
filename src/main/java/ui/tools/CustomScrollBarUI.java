@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
+/**
+ * A custom UI to add to the default Swing scrollbar to make it look better.
+ */
 public class CustomScrollBarUI extends BasicScrollBarUI 
 {
 	public CustomScrollBarUI(Color trackColor, Color thumbColor)
@@ -23,11 +26,9 @@ public class CustomScrollBarUI extends BasicScrollBarUI
 	
     @Override
     protected void configureScrollBarColors() {
-        //this.thumbColor = Color.DARK_GRAY; 
         this.thumbDarkShadowColor = Color.GRAY;
         this.thumbHighlightColor = Color.LIGHT_GRAY;
         this.thumbLightShadowColor = Color.WHITE;
-        //this.trackColor = Color.LIGHT_GRAY; 
         this.trackHighlightColor = Color.GRAY;
     }
 

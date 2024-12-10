@@ -25,6 +25,9 @@ import ui.tools.CustomScrollBarUI;
 import ui.tools.NonOpaqueJLabel;
 import ui.tools.NonOpaqueTextArea;
 
+/**
+ * A panel that contains a small description of our company and our goal.
+ */
 public class GoalPanel extends JPanel
 {
 	public GoalPanel()

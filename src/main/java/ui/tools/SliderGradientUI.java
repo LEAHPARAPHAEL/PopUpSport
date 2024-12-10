@@ -12,6 +12,9 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JSlider;
 import javax.swing.plaf.basic.BasicSliderUI;
 
+/**
+ * The UI to add to the SliderGradient to paint the gradient colors.
+ */
 public class SliderGradientUI extends BasicSliderUI 
 {
 
@@ -33,10 +36,6 @@ public class SliderGradientUI extends BasicSliderUI
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         AffineTransform tra = g2.getTransform();
         g2.translate(thumbRect.x, thumbRect.y);
-        //g2.setPaint(new GradientPaint(0, 0, new Color(237, 237, 237), thumbRect.width, thumbRect.height, new Color(205, 205, 205)));
-        //g2.fill(new Ellipse2D.Double(0, 0, thumbRect.width, thumbRect.height));
-        //g2.setPaint(new GradientPaint(0, 0, new Color(243, 243, 243), thumbRect.width, thumbRect.height, new Color(210, 210, 210)));
-        //g2.fill(new Ellipse2D.Double(1, 1, thumbRect.width - 2, thumbRect.height - 2));
         g2.setTransform(tra);
         g2.setPaint(new GradientPaint(trackRect.x, trackRect.y, sliderGradient.getColor1(), trackRect.width, trackRect.height, sliderGradient.getColor2()));
         g2.fill(new Ellipse2D.Double(thumbRect.x + 5, thumbRect.y + 5, thumbRect.width - 10, thumbRect.height - 10));
