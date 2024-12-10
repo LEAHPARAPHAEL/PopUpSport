@@ -242,7 +242,7 @@ public class DiscountPanel extends DescendantPanel
 		gbc.fill = GridBagConstraints.BOTH;
 		add(priceMax, gbc);
 		
-		PlaceholderTextField priceMaxField = new PlaceholderTextField("100");
+		PlaceholderTextField priceMaxField = new PlaceholderTextField("20000");
 		priceMaxField.setPreferredSize(new Dimension(0,0));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 2;

@@ -192,9 +192,9 @@ public class ProductManagementPanel extends DescendantPanel
 	        sliderPanel.add(selectPrice, gbc);
 	        
 	        
-	        JSlider priceSlider = new SliderGradient(0, 100, 100, GUI.BLUE, GUI.PRODUCT_CUSTOMER);
-	        priceSlider.setMajorTickSpacing(50);
-	        priceSlider.setMinorTickSpacing(10);
+	        JSlider priceSlider = new SliderGradient(0, 20000, 20000, GUI.BLUE, GUI.PRODUCT_CUSTOMER);
+	        priceSlider.setMajorTickSpacing(5000);
+	        priceSlider.setMinorTickSpacing(1000);
 	        gbc = new GridBagConstraints();
 	        gbc.gridx = 0;
 	        gbc.gridy = 1;
