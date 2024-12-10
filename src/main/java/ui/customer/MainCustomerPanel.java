@@ -38,7 +38,6 @@ public class MainCustomerPanel extends DescendantPanel
 	private Timer reservationTimer;
 	private InfoPanel infoPanel;
 	private JLabel reservationLabel;
-	private JButton reservationButton;
 	private JMenu credit;
 	private JMenu premium;
 	
@@ -286,10 +285,10 @@ public class MainCustomerPanel extends DescendantPanel
 	public void endReservation(boolean isCompleted)
 	{
 		gui.getDatabaseManager().cancelReservation();
+        reservationTimer.stop(); 
+        infoPanel.remove(reservationLabel);
 		if (isCompleted)
 		{
-			reservationTimer.stop();
-			infoPanel.remove(reservationLabel);
 			doShowInfoPanel();
 		}
 		else
