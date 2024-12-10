@@ -1446,6 +1446,8 @@ public class DatabaseManagerH2
 
 	        long secondsToAdd = (long) (estimatedTime * 3600);
 	        
+	        secondsToAdd = 15;
+	        
 	        Instant estimatedDeliveryInstant = currentTimestamp.toInstant().plusSeconds(secondsToAdd);
 	        Timestamp estimatedDeliveryTime = Timestamp.from(estimatedDeliveryInstant);
 	        
