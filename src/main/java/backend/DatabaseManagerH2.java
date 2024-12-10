@@ -337,9 +337,9 @@ public class DatabaseManagerH2
 	        	String errorMessage = e.getMessage();
 	        	System.out.println(errorMessage);
 	        	//Returns various information on the nature of the error used to notify the user
-	            if (errorMessage.contains("email"))
+	            if (errorMessage.contains("EMAIL"))
 	            	return QueryStatus.EMAIL_ERROR;
-	            if (errorMessage.contains("username"))
+	            if (errorMessage.contains("USERNAME"))
 	        		return QueryStatus.USERNAME_ERROR;
 	        	return QueryStatus.UNKNOWN_ERROR;
 	        	
@@ -959,23 +959,23 @@ public class DatabaseManagerH2
 	    public void addProductsToDatabase()
 	    {
 	    	addToProductTable("PSG football", "Official and certified Paris-Saint-Germain football (2023 season)", "PSG", 2999, 25, "balle_psg.png", "blue, red", 0);
-	    	addToProductTable("OM Jersey", "Olympique de Marseille official home jersey", "Puma", 4900, 20, "maillot.png", "white, blue", 0);
+	    	addToProductTable("OM Jersey", "Olympique de Marseille official home jersey", "Puma", 4900, 20, "maillot.png", "white, cyan", 0);
 	    	addToProductTable("Bib", "Multi-purpose red bib, adult size", "Décathlon", 399, 100, "chasuble.png", "red", 0);
 	    	addToProductTable("Hyperact Starter Gloves", "Football goalkeeping gloves", "Uhlsport", 5499, 30, "gants_foot.png", "blue, black", 0);
-	    	addToProductTable("Gilbert Omega rugby ball", "Gilbert rugby ball, Omega model", "Gilbert", 3800, 60, "balle_rugby.png", "white, blue, black", 0);
+	    	addToProductTable("Gilbert Omega rugby ball", "Gilbert rugby ball, Omega model", "Gilbert", 3800, 60, "balle_rugby.png", "white, orange, black", 0);
 	    	addToProductTable("100XBase Swimming Goggles", "Blue-pinkish swimming goggles, 100XBase. For children.", "Nabaji", 1449, 80, "lunettes.png", "magenta, cyan", 0);
-	    	addToProductTable("Olympique de Marseille football", "Official and certified OM football (2022 season)", "Olympique de Marseille", 1779, 34, "balle_om.png", "black, blue", 0);
+	    	addToProductTable("Olympique de Marseille football", "Official and certified OM football (2022 season)", "Olympique de Marseille", 1779, 34, "balle_om.png", "black, cyan", 0);
 	    	addToProductTable("Training cones", "Football training cones. Several colours are available : blue, red, yellow and white.", "Kappa", 850, 60, "plots.png", "white, blue, yellow, red", 0);
 	    	addToProductTable("Black shorts", "Adidas sportswear : Black Shorts. Essentials for Men.", "Adidas", 1590, 55, "short.png", "black", 0);
-	    	addToProductTable("Hockey Stick", "This type of stick is mainly used for discovering the sport and learning how to handle the puck.", "Fischer", 4500, 45, "crosse.png", "black, red", 0);
+	    	addToProductTable("Hockey Stick", "This type of stick is mainly used for discovering the sport and learning how to handle the puck.", "Fischer", 4500, 45, "crosse.png", "black", 0);
 	    	addToProductTable("Fencing Kit", "Fencing starter pack. Contains: fencing protective kit, mask, battle ready sword", "Start Fencing Today", 7999, 10, "Fencing_kit.png", "black, white", 0);
-	    	addToProductTable("Sports Vinyl Dumbbells", "Vinyl dumbbells, ranging from .5 to 6 kilogrammes. Fitness weights", "FXR Sports", 2999, 150, "dumbbells.png", "blue, red, black, white, green, yellow", 0);
-	    	addToProductTable("Endurance Treadmill", "Maximise your resources with a treadmill that’s simple for new users and powerful for enthusiasts.", "Matrix Fitness", 18000, 10, "treadmill.png", "black, white, yellow", 0);
-	    	addToProductTable("Tennis racket", "Perfect for players who want to spend time with friends and family.", "Wilson", 4500, 29, "tennis_racket.png", "black, green, white", 0);
-	    	addToProductTable("First EVO rowing shell", "The FIRST EVO is a French-made boat, ideal for beginners or young passengers.", "L'Atelier Composite", 20000, 3, "aviron.png", "black, green", 0);
+	    	addToProductTable("Sports Vinyl Dumbbells", "Vinyl dumbbells, ranging from .5 to 6 kilogrammes. Fitness weights", "FXR Sports", 2999, 150, "dumbbells.png", "blue, red, gray, green, yellow", 0);
+	    	addToProductTable("Endurance Treadmill", "Maximise your resources with a treadmill that’s simple for new users and powerful for enthusiasts.", "Matrix Fitness", 18000, 10, "treadmill.png", "black", 0);
+	    	addToProductTable("Tennis racket", "Perfect for players who want to spend time with friends and family.", "Wilson", 4500, 29, "tennis_racket.png", "black, green", 0);
+	    	addToProductTable("First EVO rowing shell", "The FIRST EVO is a French-made boat, ideal for beginners or young passengers.", "L'Atelier Composite", 20000, 3, "aviron.png", "green", 0);
 	    	addToProductTable("4-Tennis balls can", "Official Roland-Grappos balls can. Approved for competition by the USTA and ITF.", "Wilson", 999, 31, "tennis_balls.png", "black, yellow", 0);
 	    	addToProductTable("Girls Figure Ice Skates", "These Ice Skates provide strength and comfort for recreational skaters !", "Jackson Classics", 11500, 115, "ice_skate.png", "white", 0);
-	    	addToProductTable("Badminton Shuttlecocks", "These shuttlecocks offer a reliable option for outdoor play. Made from cork.", "KES", 879, 93, "bad_shut.png", "black, white", 0);
+	    	addToProductTable("Badminton Shuttlecocks", "These shuttlecocks offer a reliable option for outdoor play. Made from cork.", "KES", 879, 93, "bad_shut.png", "white", 0);
 	    }
 	    
 	    /**
@@ -2273,7 +2273,7 @@ public class DatabaseManagerH2
 	     */
 	    public void removePremiumStatuses()
 	    {
-	    	String updateQuery = "UPDATE ADMINDATABASE.CLIENTS c SET c.vip = ? WHERE NOT EXISTS (SELECT 1 FROM ADMINDATABASE.ACHIEVEMENTS a WHERE a.clientUsername = c.username AND a.achievementDate > DATEADD('DAY', -10, CURRENT_TIMESTAMP))";
+	    	String updateQuery = "UPDATE ADMINDATABASE.CLIENTS c SET c.vip = ? WHERE NOT EXISTS (SELECT 1 FROM ADMINDATABASE.ACHIEVEMENTS a WHERE a.clientUsername = c.username AND a.achievementDate > DATEADD('DAY', -10, CURRENT_TIMESTAMP)) AND EXISTS (SELECT 1 FROM ADMINDATABASE.ACHIEVEMENTS aa WHERE aa.clientUsername = c.username GROUP BY aa.clientUsername HAVING COUNT(aa.achievementID) >= 5)";
 	    	try 
 	    	{
 	    		Connection conn = getH2Connection();

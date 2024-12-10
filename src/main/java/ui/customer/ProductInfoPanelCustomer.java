@@ -292,7 +292,7 @@ public class ProductInfoPanelCustomer extends DescendantPanel implements Refresh
                 int imageSize = Math.min(panelWidth, panelHeight)/2;
                 if (panelWidth > 0 && panelHeight > 0) {
             		Image productImage = product.getIcon().getImage();
-            		Image resizedImage = productImage.getScaledInstance(imageSize, imageSize, Image.SCALE_SMOOTH);
+            		Image resizedImage = productImage.getScaledInstance(imageSize - 20, imageSize - 20, Image.SCALE_SMOOTH);
             		ImageIcon resizedIcon = new ImageIcon(resizedImage);
             		productIcon.setIcon(resizedIcon);
                     productIcon.setHorizontalAlignment(SwingConstants.CENTER); 

@@ -190,7 +190,7 @@ public class OrderPanelAdmin extends DescendantPanel implements Refreshable
 			gbc.weighty = 0.33;
 			gbc.gridwidth = 2;
 			gbc.fill = GridBagConstraints.BOTH;
-			gbc.insets = new Insets(5,5,5,5);
+			gbc.insets = new Insets(5,5,0,5);
 			add(price, gbc);
 			
 			
@@ -202,7 +202,7 @@ public class OrderPanelAdmin extends DescendantPanel implements Refreshable
 			gbc.weightx = 0.66;
 			gbc.weighty = 0.33;
 			gbc.fill = GridBagConstraints.BOTH;
-			gbc.insets = new Insets(5,5,5,5);
+			gbc.insets = new Insets(5,5,0,5);
 			add(address, gbc);
 			
 			
@@ -216,7 +216,7 @@ public class OrderPanelAdmin extends DescendantPanel implements Refreshable
 			gbc.weightx = 0.66;
 			gbc.weighty = 0.33;
 			gbc.fill = GridBagConstraints.BOTH;
-			gbc.insets = new Insets(5,5,5,5);
+			gbc.insets = new Insets(5,5,0,5);
 			add(orderTime, gbc);
 			
 		
@@ -254,7 +254,7 @@ public class OrderPanelAdmin extends DescendantPanel implements Refreshable
 			gbc.weightx = 0.33;
 			gbc.weighty = 0.33;
 			gbc.gridwidth = 2;
-			gbc.insets = new Insets(5,5,5,5);
+			gbc.insets = new Insets(5,5,0,5);
 			gbc.fill = GridBagConstraints.BOTH;
 			add(status, gbc);
 			

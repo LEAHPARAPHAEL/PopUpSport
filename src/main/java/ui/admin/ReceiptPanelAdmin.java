@@ -245,11 +245,11 @@ public class ReceiptPanelAdmin extends DescendantPanel
         Paragraph orderReference = new Paragraph(String.format("Receipt for Order #%d", order.getOrderID())).setBold();
         Paragraph orderAddress = new Paragraph("Delivery address : "+ order.getAddress());
         Paragraph orderTime = new Paragraph("Date : "+ formattedDate).setMarginBottom(20);
-        Paragraph name = new Paragraph("Customer : " + gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getName() + " " + gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getFirstName()).setMarginBottom(40);
+        Paragraph name = new Paragraph("Customer : " + customer.getName() + " " + customer.getFirstName()).setMarginBottom(40);
         Paragraph details = new Paragraph("Order details").setTextAlignment(TextAlignment.CENTER).setFontSize(16);
         document.add(title);
         document.add(separator);
-        document.add(new Paragraph().setMarginBottom(25));
+        document.add(new Paragraph().setMarginBottom(20));
         document.add(orderReference);
         document.add(orderAddress);
         document.add(orderTime);
@@ -282,7 +282,7 @@ public class ReceiptPanelAdmin extends DescendantPanel
         
         table.addCell(new Cell(1, 2).add(new Paragraph("Total price").setBold()));
         table.addCell(new Cell().add(p));
-        table.setMarginBottom(20);
+        table.setMarginBottom(15);
         document.add(table);
         
         
@@ -291,7 +291,7 @@ public class ReceiptPanelAdmin extends DescendantPanel
         com.itextpdf.layout.element.Image logoOp = new com.itextpdf.layout.element.Image(xObject);
         logoOp.setHorizontalAlignment(HorizontalAlignment.CENTER);
         logoOp.setOpacity(.3f);
-        logoOp.setMarginBottom(40);
+        logoOp.setMarginBottom(20);
         document.add(logoOp);
         
         
