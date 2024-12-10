@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map.Entry;
@@ -26,14 +27,26 @@ import javax.swing.SwingUtilities;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.xobject.PdfImageXObject;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
+import com.itextpdf.layout.property.VerticalAlignment;
 
 import backend.CustomerProfile;
 import backend.Order;
@@ -166,44 +179,175 @@ public class ReceiptPanelAdmin extends DescendantPanel
         //Creates a new pdf document.
         PdfDocument pdfDocument = new PdfDocument(writer);
         Document document = new Document(pdfDocument);
-        Paragraph title = new Paragraph("Order Receipt").setTextAlignment(TextAlignment.CENTER).setFontSize(20).setMarginBottom(20);
+        Paragraph title = new Paragraph("INVOICE").setTextAlignment(TextAlignment.CENTER).setFontSize(20).setMarginBottom(20).setBold();
+        
+        //Add a border between INVOICE and customer info
+        Border border_invoice = new SolidBorder(Color.DARK_GRAY, 1.5f);
+        float[] width = {505f};
+        Table separator = new Table(width);
+        separator.setBorder(border_invoice);
+        
+        
+        
+        final String FONT_PATH = "fonts/EversonMono.ttf";
+
+	    InputStream fontStream = getClass().getClassLoader().getResourceAsStream(FONT_PATH);
+	
+	    byte[] fontBytes;
+	    try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) 
+	    {
+	        byte[] data = new byte[1024];
+	        int bytesRead;
+	        while ((bytesRead = fontStream.read(data, 0, data.length)) != -1) 
+	        {
+	            buffer.write(data, 0, bytesRead);
+	        }
+	        buffer.flush();
+	        fontBytes = buffer.toByteArray();
+	    }
+	
+	    PdfFont font = PdfFontFactory.createFont(fontBytes, PdfEncodings.IDENTITY_H, true);
+        
+	    //Add our logo
+	    final String LOGO_PATH = "Logo.png";
+
+	    InputStream logoStream = getClass().getClassLoader().getResourceAsStream(LOGO_PATH);
+
+	    byte[] logoBytes;
+	    try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) 
+	    {
+	        byte[] data = new byte[1024];
+	        int bytesRead;
+	        while ((bytesRead = logoStream.read(data, 0, data.length)) != -1) 
+	        {
+	            buffer.write(data, 0, bytesRead);
+	        }
+	        buffer.flush();
+	        logoBytes = buffer.toByteArray();
+	    }
+
+	    // Create the PdfImageXObject from the byte array
+	    PdfImageXObject xObject = new PdfImageXObject(ImageDataFactory.create(logoBytes));
+        com.itextpdf.layout.element.Image logoTopRight = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.RIGHT);
+        document.add(logoTopRight);
+        
+        /*// BOTTOM LEFT IMAGE
+        com.itextpdf.layout.element.Image logoBottomLeft = new com.itextpdf.layout.element.Image(xObject, 100).setHorizontalAlignment(HorizontalAlignment.LEFT);
+        logoBottomLeft.setFixedPosition(20, 20);
+        document.add(logoBottomLeft);
+        */
+        
+        
         
         //Adds all the information contained in the order, separated in several paragraphs.
         LocalDateTime formattedOrderTime = order.getOrderTime().toLocalDateTime();
         String formattedDate = formattedOrderTime.format(formatter);
-        Paragraph orderReference = new Paragraph(String.format("Order #%d", order.getOrderID()));
-        Paragraph orderAddress = new Paragraph("Delivery address : "+order.getAddress());
-        Paragraph orderTime = new Paragraph("Date : "+formattedDate).setMarginBottom(20);
-        Paragraph name = new Paragraph("Customer : " + customer.getName() + " " + customer.getFirstName()).setMarginBottom(40);
+        Paragraph orderReference = new Paragraph(String.format("Receipt for Order #%d", order.getOrderID())).setBold();
+        Paragraph orderAddress = new Paragraph("Delivery address : "+ order.getAddress());
+        Paragraph orderTime = new Paragraph("Date : "+ formattedDate).setMarginBottom(20);
+        Paragraph name = new Paragraph("Customer : " + gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getName() + " " + gui.getDatabaseManager().getCustomerManager().getCurrentCustomer().getFirstName()).setMarginBottom(40);
         Paragraph details = new Paragraph("Order details").setTextAlignment(TextAlignment.CENTER).setFontSize(16);
         document.add(title);
+        document.add(separator);
+        document.add(new Paragraph().setMarginBottom(25));
         document.add(orderReference);
         document.add(orderAddress);
         document.add(orderTime);
         document.add(name);
         document.add(details);
 
+        
         //Table containing for each product its quantity, unit price when ordered and total price.
         Table table = new Table(UnitValue.createPercentArray(new float[]{50, 25, 25}));
         table.setWidth(UnitValue.createPercentValue(100)); 
 
         table.addHeaderCell(new Cell().add(new Paragraph("Product").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
-        table.addHeaderCell(new Cell().add(new Paragraph("Quantity x unit price").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
+        table.addHeaderCell(new Cell().add(new Paragraph("Quantity x Unit Price").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
         table.addHeaderCell(new Cell().add(new Paragraph("Price").setBold()).setBackgroundColor(com.itextpdf.kernel.color.Color.LIGHT_GRAY));
 
         for (Entry<Integer, Integer> entry : order.getOrderContent().entrySet()) {
         	Product product = gui.getDatabaseManager().getProductManager().getProductById(entry.getKey());
             table.addCell(new Cell().add(new Paragraph(product.getName())));
             table.addCell(new Cell().add(new Paragraph(String.format("%d x %.2f", entry.getValue(), order.getProductPriceWhenOrdered(entry.getKey())))));
-            table.addCell(new Cell().add(new Paragraph(String.format("%.2f \u2359", entry.getValue()*order.getProductPriceWhenOrdered(entry.getKey())))));
+            table.addCell(new Cell().add(new Paragraph(String.format("%.2f", entry.getValue()*order.getProductPriceWhenOrdered(entry.getKey())))));
 
 
         }
         double total = order.getPrice();
+        Paragraph p = new Paragraph();
+        Text totalValue = new Text(String.format("%.2f ", total)).setBold();
+        Text conesCurr = new Text("\u2359").setBold().setFont(font).setFontColor(com.itextpdf.kernel.color.Color.RED);
+        p.add(totalValue);
+        p.add(conesCurr);
+        
         table.addCell(new Cell(1, 2).add(new Paragraph("Total price").setBold()));
-        table.addCell(new Cell().add(new Paragraph(String.format("%.2f \u2359", total)).setBold()));
-
+        table.addCell(new Cell().add(p));
+        table.setMarginBottom(20);
         document.add(table);
+        
+        
+        //Opaque logo
+        
+        com.itextpdf.layout.element.Image logoOp = new com.itextpdf.layout.element.Image(xObject);
+        logoOp.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        logoOp.setOpacity(.3f);
+        logoOp.setMarginBottom(40);
+        document.add(logoOp);
+        
+        
+        //Import French Marianne
+	    final String MARIANNE_PATH = "French.png";
+
+	    InputStream marianneStream = getClass().getClassLoader().getResourceAsStream(MARIANNE_PATH);
+
+	    byte[] marianneBytes;
+	    try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) 
+	    {
+	        byte[] data = new byte[1024];
+	        int bytesRead;
+	        while ((bytesRead = marianneStream.read(data, 0, data.length)) != -1) 
+	        {
+	            buffer.write(data, 0, bytesRead);
+	        }
+	        buffer.flush();
+	        marianneBytes = buffer.toByteArray();
+	    }
+	    
+	    ImageData frenchMarianne = ImageDataFactory.create(marianneBytes);
+	    com.itextpdf.layout.element.Image marianne = new com.itextpdf.layout.element.Image(frenchMarianne).scaleToFit(30, 30);
+        
+        
+        Paragraph companyInfo = new Paragraph("PopUpSport is a legal entity, dependent on the French Ministry of Health.\nRegistered in France : 14 Av. Duquesne, 75350 Paris.");
+        companyInfo.setTextAlignment(TextAlignment.CENTER);
+        Border compBorder = new SolidBorder(1f);
+        //companyInfo.set
+        
+        /*
+        Paragraph frame = new Paragraph();
+        frame.add(marianne);
+        frame.add(companyInfo);
+        frame.add(marianne);
+        document.add(companyInfo);
+        */
+        
+        float[] columnWidths = {1, 10, 1}; // Adjust column widths as needed
+        Table tableCompany = new Table(columnWidths);
+        tableCompany.setWidth(UnitValue.createPercentValue(100));
+        tableCompany.setBorder(compBorder);
+
+        // Add cells to the table
+        tableCompany.addCell(new com.itextpdf.layout.element.Cell().add(marianne).setBorder(null).setTextAlignment(TextAlignment.LEFT).setVerticalAlignment(VerticalAlignment.MIDDLE));
+        tableCompany.addCell(new com.itextpdf.layout.element.Cell().add(companyInfo).setBorder(null));
+        tableCompany.addCell(new com.itextpdf.layout.element.Cell().add(marianne).setBorder(null).setTextAlignment(TextAlignment.RIGHT).setVerticalAlignment(VerticalAlignment.MIDDLE));
+        
+        tableCompany.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        tableCompany.setOpacity(.9f);
+
+        // Add the table to the document
+        document.add(tableCompany);
+        
+        
+        
         document.close();
 
         return byteArrayOutputStream.toByteArray();

@@ -761,7 +761,7 @@ public class ProductManagementPanel extends DescendantPanel
 	        setBorder(GUI.GRAY_BORDER);
 	        setOpaque(false);
 	        
-	        NonOpaqueJLabel searchSection = new NonOpaqueJLabel("Find a product by name, brand, decription or keyword.");
+	        NonOpaqueJLabel searchSection = new NonOpaqueJLabel("Find a product by name, brand, description or keyword.");
 	        GridBagConstraints gbc = new GridBagConstraints();
 	        gbc.gridx = 0;
 	        gbc.gridy = 0;
