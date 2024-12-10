@@ -87,3 +87,5 @@ CREATE TABLE Achievements (
 
 
 INSERT INTO Admins(adminUsername, adminPassword) VALUES('admin', '$2a$12$GlCGFvvCiFk.zVmmgMs.UeEHqTqGGLKVW/5RWqvz5ZxHS8V5D7r8C');
+INSERT INTO Clients(lastname, firstname, email, username, userPassword, credit, vip) VALUES ('Dantès', 'Edmond', 'edmond.dantes@faria.com', 'Wilmore', '$2a$12$FCUjFC4aRtOQh.gREWT0BOpNSG6DYtylDP/iH4TPuWNUu8XMX9fEi', 12000, TRUE);
+INSERT INTO Clients(lastname, firstname, email, username, userPassword, credit, vip) VALUES ('Mentta', 'Sam', 'sam.manta@psl.eu', 'SamLePirate', '$2a$12$iyjDTDQQveg62S4TuQ2o/uSVVtiJ68udkrZxrxhjJOSazEWG95yqq', 6000, FALSE);
